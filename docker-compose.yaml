@@ -12,3 +12,12 @@ services:
     env_file:
       - .env
     command: [ "next", "start", "-p", "3000" ]
+    depends_on:
+      - browserless
+
+  browserless:
+    image: browserless/chrome:latest
+    ports:
+      - "9222:3000"  # Map host's port 9222 to container's port 3000
+    environment:
+      - MAX_CONCURRENT_SESSIONS=10
